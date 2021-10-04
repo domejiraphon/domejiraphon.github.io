@@ -14,7 +14,8 @@ body{
   height: 100vh;
   /* overflow: hidden; */
   padding: 10px;
-  background: linear-gradient(to bottom, #ea8968 0%, #5c030f 100%);
+  /*background: linear-gradient(to bottom, #ea8968 0%, #5c030f 100%);*/
+  background-image: url("https://www.nasa.gov/sites/default/files/thumbnails/image/archives_helix.jpg"); 
 }
 .wrapper{
   background: #fff;
