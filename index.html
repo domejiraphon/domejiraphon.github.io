@@ -32,7 +32,7 @@
                     My undergraduate studies were completed at Chulalongkorn University in Bangkok, Thailand.
                 </p>
                 <p style="text-align:center">
-                  <a href="mailto:jy3694n@nyu.edu">Email</a> &nbsp;/&nbsp;
+                  <a href="mailto:jy3694@nyu.edu">Email</a> &nbsp;/&nbsp;
                   <a href="data/cv_.pdf">CV</a> &nbsp;/&nbsp;
                   <a href="https://scholar.google.com/citations?user=8K0ZSgn1z2YC&hl=en&oi=ao">Scholar</a> &nbsp;/&nbsp;
                   <a href="https://github.com/domejiraphon">Github</a>
@@ -50,10 +50,50 @@
                 <p>
                   I am interested in the intersection of computer vision and graphics. My past projects have centered around AI that creates images and inverse rendering to make things look real.
                 </p>
+                <p style="color: grey; font-size: smaller; margin-bottom: -10px;">
+                  (* means equal contribution)
+                </p>
               </td>
             </tr>
           </tbody></table>
           <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+          <tr onmouseout="sculpting_stop()" onmouseover="sculpting_start()">
+              <td style="padding:20px;width:25%;vertical-align:middle">
+                <div class="one">
+                  <div class="two" id='sculpting_image'><video  width=100% height=100% muted autoplay loop>
+                  <source src="images/joker.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video></div>
+            <img src='images/joker.jpg' width="160">
+          </div>
+          <script type="text/javascript">
+            function sculpting_start() {
+              document.getElementById('sculpting_image').style.opacity = "1";
+            }
+  
+            function sculpting_stop() {
+              document.getElementById('sculpting_image').style.opacity = "0";
+            }
+            sculpting_stop()
+          </script>
+        </td>
+        <td style="padding:20px;width:75%;vertical-align:middle">
+          <a>
+            <span class="papertitle">Image Sculpting: Precise Object Editing with 3D Geometry Control</span>
+          </a>
+          <br>
+          <strong>Jiraphon Yenphraphai</strong>,
+          <a href="https://xichenpan.com/">Xichen Pan</a>,
+          <a>Sainan Liu</a>,
+          <a href="https://cims.nyu.edu/gcl/daniele.html">Daniele Panozzo</a>,
+          <a href="https://www.sainingxie.com">Saining Xie</a>
+          <br>
+          <em>CVPR, 2024 (Under Review)</em>
+          <p>
+          A framework allows for detailed and realistic 3D editing from a single image, including precise pose editing, rotation, and more.
+          </p>
+        </td>
+      </tr>
       <tr onmouseout="nex_stop()" onmouseover="nex_start()">
             <td style="padding:20px;width:25%;vertical-align:middle">
               <div class="one">
@@ -129,7 +169,7 @@
       <strong>Jiraphon Yenphraphai</strong>,
       <a href="https://www.supasorn.com">Supasorn Suwajanakorn</a>
       <br>
-      <em>TPAMI 2022</em> 
+      <em>TPAMI, 2022</em> 
       <br>
       <a href="https://nex-mpi.github.io/360">project page</a>
       /
