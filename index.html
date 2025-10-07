@@ -44,7 +44,8 @@
                 <p>Hello, I'm a PhD student at Purdue University where I am advised by <a href="https://raymond-yeh.com/index.html">Raymond A. Yeh</a>. My research focuses on the intersection of computer vision and graphics.
                 </p>
                 <p>
-                    I previously received my Master's degree from NYU Courant, under the supervision of <a href="https://www.sainingxie.com/">Saining Xie</a>. Earlier in my career, I was fortunate to be advised by <a href="https://www.supasorn.com">Supasorn Suwajanakorn</a>, with a focus on view synthesis.
+                    I am currently a research intern on the <a href="https://research.snap.com/index.html">Creative Vision</a> at Snapchat, where I work with <a href="https://mightychaos.github.io/">Chaoyang Wang</a>, <a href="https://peterwonka.net/">Peter Wonka</a>, and <a href="https://ashmrz.github.io/">Ashkan Mirzaei</a>.
+                    Previously, I received my Master's degree from NYU Courant, under the supervision of <a href="https://www.sainingxie.com/">Saining Xie</a>. Earlier in my career, I was fortunate to be advised by <a href="https://www.supasorn.com">Supasorn Suwajanakorn</a>, with a focus on view synthesis.
                     My undergraduate studies were completed at Chulalongkorn University in Bangkok, Thailand.
                 </p>
                 <p style="text-align:center">
@@ -55,7 +56,7 @@
                 </p>
               </td>
               <td style="padding:2.5%;width:40%;max-width:40%">
-                <a href="images/profile_pic2.jpg"><img style="width:100%;max-width:100%;object-fit: cover; border-radius: 50%;" alt="profile photo" src="images/profile_pic2.jpg" class="hoverZoomLink"></a>
+                <a href="images/IMG_6625.jpg"><img style="width:100%;max-width:100%;object-fit: cover; border-radius: 50%;" alt="profile photo" src="images/IMG_6625.jpg" class="hoverZoomLink"></a>
               </td>
             </tr>
           </tbody></table>
@@ -74,6 +75,49 @@
           </tbody></table>
           <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
           <tr onmouseout="sculpting_stop()" onmouseover="sculpting_start()">
+              <td style="padding:20px;width:25%;vertical-align:middle">
+                <div class="one">
+                  <div class="two" id='shapegen4d'><video  width=100% height=100% muted autoplay loop>
+                  <source src="images/walking_astronaut.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video></div>
+            <img src='images/astronaut.png' width="160">
+          </div>
+          <script type="text/javascript">
+            function sculpting_start() {
+              document.getElementById('sculpting_image').style.opacity = "1";
+            }
+  
+            function sculpting_stop() {
+              document.getElementById('sculpting_image').style.opacity = "0";
+            }
+            sculpting_stop()
+          </script>
+        </td>
+        <td style="padding:20px;width:75%;vertical-align:middle">
+          <a>
+            <span class="papertitle">ShapeGen4D: Towards High Quality 4D Shape Generation from Videos</span>
+          </a>
+          <br>
+          <strong>Jiraphon Yenphraphai</strong>,
+          <a href="https://ashmrz.github.io/">Ashkan Mirzaei</a>,
+          <a href="https://windvchen.github.io/">Jianqi Chen</a>,
+          <a href="https://www.linkedin.com/in/jiaxu-zou/">Jiaxu Zou</a>,
+          <a href="http://www.stulyakov.com/">Sergey Tulyakov</a>
+          <a href="https://raymond-yeh.com/">Raymond A. Yeh</a>
+          <a href="https://peterwonka.net/">Peter Wonka</a>
+          <a href="https://mightychaos.github.io/">Chaoyang Wang</a>
+          
+          <br>
+            <a href="https://shapegen4d.github.io/">project page</a>
+            /
+            <a href="https://arxiv.org/abs/2401.01702">arXiv</a>
+            <p>
+          We introduce a native video-to-4D shape framework that synthesizes a single dynamic 3D representation end-to-end from the video. 
+          </p>
+        </td>
+      </tr>
+            <tr onmouseout="sculpting_stop()" onmouseover="sculpting_start()">
               <td style="padding:20px;width:25%;vertical-align:middle">
                 <div class="one">
                   <div class="two" id='sculpting_image'><video  width=100% height=100% muted autoplay loop>
