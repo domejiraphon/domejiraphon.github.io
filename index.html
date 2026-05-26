@@ -74,6 +74,50 @@
             </tr>
           </tbody></table>
           <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+          <tr onmouseout="teaser_hover_stop()" onmouseover="teaser_hover_start()">
+              <td style="padding:20px;width:25%;vertical-align:middle">
+                <div class="one">
+                  <div class="two" id="teaser_hover_image"><video width=100% height=100% muted autoplay loop>
+                  <source src="images/teaser.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video></div>
+            <img src="images/teaser_thumb.jpg" width="160" alt="project teaser">
+          </div>
+          <script type="text/javascript">
+            function teaser_hover_start() {
+              document.getElementById('teaser_hover_image').style.opacity = "1";
+            }
+
+            function teaser_hover_stop() {
+              document.getElementById('teaser_hover_image').style.opacity = "0";
+            }
+            teaser_hover_stop()
+          </script>
+        </td>
+        <td style="padding:20px;width:75%;vertical-align:middle">
+          <a>
+            <span class="papertitle">Helix4D: Complex 4D Mesh Generation</span>
+          </a>
+          <br>
+          <strong>Jiraphon Yenphraphai</strong>,
+          <a href="https://windvchen.github.io/">Jianqi Chen</a>,
+          <a href="https://jianwang-cmu.github.io/">Jian Wang</a>,
+          <a href="https://guochengqian.github.io/">Gordon Qian</a>,
+          <a href="https://stulyakov.com/">Sergey Tulyakov</a>,
+          <a href="https://rameenabdal.github.io/">Rameen Abdal</a>,
+          <a href="https://raymond-yeh.com/">Raymond A. Yeh</a>,
+          <a href="https://peterwonka.net/">Peter Wonka</a>,
+          <a href="https://mightychaos.github.io/">Chaoyang Wang</a>
+          <br>
+          <a href="https://snap-research.github.io/helix4d/">project page</a>
+          /
+          <a href="https://arxiv.org/abs/2605.26109">arXiv</a>
+          <br>
+          <p>
+          A dynamic mesh generation framework that can model challenging 4D scenarios, including topology changes, deformation, shattering, melting, transparency, and thin structures.
+          </p>
+        </td>
+      </tr>
           <tr onmouseout="shapegen_stop()" onmouseover="shapegen_start()">
               <td style="padding:20px;width:25%;vertical-align:middle">
                 <div class="one">
