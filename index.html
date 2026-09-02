@@ -65,7 +65,7 @@
           <td style="padding:20px;width:100%;vertical-align:middle">
                 <h2>Research</h2>
                 <p>
-                  I am interested in 3D&4D reconstruction. My past projects have centered around AI that creates images and inverse rendering to make things look real.
+                  I am interested in 3D&4D reconstruction/generation, World Models. 
                 </p>
                 <p style="color: grey; font-size: smaller; margin-bottom: -30px;">
                   (* means equal contribution)
@@ -78,7 +78,7 @@
               <td style="padding:20px;width:25%;vertical-align:middle">
                 <div class="one">
                   <div class="two" id="teaser_hover_image"><video width=100% height=100% muted autoplay loop>
-                  <source src="images/teaser.mp4" type="video/mp4">
+                  <source src="images/teaser_white.mp4" type="video/mp4">
                   Your browser does not support the video tag.
                 </video></div>
             <img src="images/teaser_thumb.jpg" width="160" alt="project teaser">
@@ -109,7 +109,7 @@
           <a href="https://peterwonka.net/">Peter Wonka</a>,
           <a href="https://mightychaos.github.io/">Chaoyang Wang</a>
           <br>
-          <em>ArXiv, 2026</em>
+          <em>ArXiv, 2026 (Under Review)</em>
           <br>
           <a href="https://snap-research.github.io/helix4d/">project page</a>
           /
@@ -117,6 +117,51 @@
           <br>
           <p>
           A dynamic mesh generation framework that can model challenging 4D scenarios, including topology changes, deformation, shattering, melting, transparency, and thin structures.
+          </p>
+        </td>
+      </tr>
+      <tr onmouseout="meshloom_stop()" onmouseover="meshloom_start()">
+        <td style="padding:20px;width:25%;vertical-align:middle">
+          <div class="one">
+            <div class="two" id="meshloom_image"><video width="100%" height="100%" muted autoplay loop playsinline>
+              <source src="images/meshloom_teaser.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video></div>
+            <a href="https://meshloom.github.io/">
+              <img src="images/meshloom_teaser.jpg" width="160" height="160" alt="MeshLoom project teaser">
+            </a>
+          </div>
+          <script type="text/javascript">
+            function meshloom_start() {
+              document.getElementById('meshloom_image').style.opacity = "1";
+            }
+
+            function meshloom_stop() {
+              document.getElementById('meshloom_image').style.opacity = "0";
+            }
+            meshloom_stop()
+          </script>
+        </td>
+        <td style="padding:20px;width:75%;vertical-align:middle">
+          <a href="https://meshloom.github.io/">
+            <span class="papertitle">MeshLoom: Feed-Forward Non-Rigid Registration of Mesh Sequences</span>
+          </a>
+          <br>
+          <a href="https://windvchen.github.io/">Jianqi Chen</a>,
+          <strong>Jiraphon Yenphraphai</strong>,
+          <a href="https://xjtang.com/">Xiangjun Tang</a>,
+          <a href="https://stulyakov.com/">Sergey Tulyakov</a>,
+          <a href="https://mightychaos.github.io/">Chaoyang Wang</a>,
+          <a href="https://peterwonka.net/">Peter Wonka</a>,
+          <a href="https://rameenabdal.github.io/">Rameen Abdal</a>
+          <br>
+          <em>ArXiv, 2026 (Under Review)</em>
+          <br>
+          <a href="https://meshloom.github.io/">project page</a>
+          /
+          <a href="https://arxiv.org/abs/2606.17027">arXiv</a>
+          <p>
+          A feed-forward registration network that directly reconstructs vertex deformations across mesh sequences, registering multiple meshes within seconds.
           </p>
         </td>
       </tr>
