@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3D Reconstruction Study</title>
+<style>
+:root{color-scheme:dark;--bg:#101114;--panel:#191b20;--line:#30343c;--text:#f2f3f5;--muted:#a4aab5;--accent:#8ab4ff;--good:#244f38}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.45 system-ui,sans-serif}
+header{position:sticky;top:0;z-index:5;background:#101114f5;border-bottom:1px solid var(--line);padding:14px 20px}
+.bar{display:flex;gap:14px;align-items:center;flex-wrap:wrap}.title{font-size:21px;font-weight:700}.spacer{flex:1}
+input{height:36px;background:var(--panel);border:1px solid var(--line);border-radius:6px;color:var(--text);padding:0 10px}
+button{min-height:44px;padding:0 18px;border:2px solid var(--line);border-radius:8px;background:var(--panel);color:var(--text);cursor:pointer;font-weight:700;font-size:15px}
+button:hover:not(:disabled){border-color:var(--accent);background:#202b40}button:disabled{opacity:.45;cursor:not-allowed}
+main{max-width:1800px;margin:0 auto;padding:22px}
+#welcome{display:grid;place-items:center;min-height:72vh;text-align:center}#welcome[hidden]{display:none}
+.intro{max-width:620px;display:grid;gap:14px;justify-items:center}
+.intro h1{margin:0;font-size:30px}.intro p{margin:0;color:var(--muted);font-size:16px}
+.intro .criteria{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;color:var(--text)}
+.chip{border:1px solid var(--line);border-radius:999px;padding:6px 14px;background:var(--panel);font-weight:600;font-size:14px}
+#start{min-width:240px;background:#1f3a64;border-color:var(--accent);font-size:17px}
+.question{display:none}.question.active{display:block}
+.prompt{text-align:center;font-size:20px;font-weight:700;margin:0 0 4px}
+.hint{text-align:center;color:var(--muted);margin:0 0 14px;font-size:14px}
+.videos{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+/* Cap the card by viewport height so the answers stay above the fold. */
+.card{background:var(--panel);border:1px solid var(--line);border-radius:9px;overflow:hidden;width:100%;max-width:min(100%,46vh);margin:0 auto}
+.card h2{font-size:16px;text-align:center;margin:0;padding:8px;border-bottom:1px solid var(--line)}
+video,.card img{display:block;width:100%;aspect-ratio:1;object-fit:contain;background:#050505}
+.answers{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:14px auto 0;max-width:900px}
+.answer{min-height:58px;font-size:17px}.answer.selected{background:var(--good);border-color:#68d391;box-shadow:0 0 0 2px #68d39155}
+.status{text-align:center;color:var(--muted);min-height:22px;font-size:14px;margin-top:6px}
+/* Narrow screens keep the three panels side by side so nothing needs scrolling. */
+@media(max-width:1000px){
+ main{padding:10px}.videos{gap:6px}.answers{gap:8px;margin-top:12px;max-width:none}
+ .card h2{font-size:13px;padding:5px}
+ .prompt{font-size:16px}.hint{font-size:12px;margin-bottom:10px}
+ .answer{min-height:52px;font-size:14px;padding:0 6px}.long{display:none}
+ header{padding:10px 12px}.title{font-size:17px}
+ .intro h1{font-size:24px}#welcome{min-height:60vh}
+}
+/* Landscape phones are short: drop the hint and shrink the panels to stay on one screen. */
+@media(max-height:520px){
+ .hint{display:none}.card{max-width:min(100%,42vh)}
+ .prompt{font-size:15px;margin-bottom:8px}
+ .answer{min-height:44px}.answers{margin-top:10px}
+ .status{min-height:16px;margin-top:2px}
+}
+</style>
+</head>
+<body>
+<header><div class="bar"><div class="title">3D Reconstruction Study</div><div class="spacer"></div>
+<span id="progress"></span></div></header>
+<main>
+<section id="welcome">
+<div class="intro">
+<h1>Single-image 3D reconstruction</h1>
+<p>Given an input image, pick which result, A or B, is a 3D reconstruction more aligned with that image.</p>
+<div class="criteria"><span class="chip">Faithfulness</span><span class="chip">Coverage</span><span class="chip">Cleanliness</span></div>
+<p>25 questions · about 8 minutes · clicking an answer moves to the next question.</p>
+<label>Participant code (optional) <input id="participant" maxlength="80" placeholder="e.g. p01"></label>
+<button id="start">Start study</button>
+</div>
+</section>
+<section id="study" hidden>
+<div class="question active">
+<div class="prompt">Which result is more aligned with the input image?</div>
+<p class="hint">Consider faithfulness to the input, coverage of the scene, and how clean the geometry is.</p>
+<div class="videos"><div class="card"><h2>Input</h2><img id="inputImage" alt="Input image"></div>
+<div class="card"><h2>Result A</h2><video id="videoA" autoplay muted loop playsinline preload="auto"></video></div>
+<div class="card"><h2>Result B</h2><video id="videoB" autoplay muted loop playsinline preload="auto"></video></div></div>
+<div class="answers"><button class="answer" data-answer="A">Result A<span class="long"> is better</span></button>
+<button class="answer" data-answer="tie">Tie<span class="long"> / no clear difference</span></button>
+<button class="answer" data-answer="B">Result B<span class="long"> is better</span></button></div>
+<div class="status" id="status"></div></div>
+</section>
+<section id="done" hidden><h1>Thank you</h1><p>Your responses were recorded.</p></section>
+</main>
+<script>
+const CFG = {"mode": "static", "api": "https://helix-user-study.jiraphon-yenphraphai.workers.dev/answer", "manifest": "manifest.json", "total": 25};
+let session=null, saving=false;
+const $=id=>document.getElementById(id);
+const videoA=$('videoA'), videoB=$('videoB');
+let syncing=false;
+function setProgress(){ $('progress').textContent=session?`Question ${session.index+1} / ${session.questions.length}`:''; }
+// iOS may never reach canplaythrough, so settle on whatever fires first and cap the wait.
+const READY_EVENTS=['canplaythrough','canplay','error'];
+function buffered(video){
+ if(video.readyState>=3)return Promise.resolve();
+ return new Promise(resolve=>{
+  const done=()=>{clearTimeout(timer);READY_EVENTS.forEach(e=>video.removeEventListener(e,done));resolve()};
+  READY_EVENTS.forEach(e=>video.addEventListener(e,done));
+  const timer=setTimeout(done,4000);
+ });
+}
+function playBoth(){
+ // Only seek when actually away from the start: seeking a half-loaded video stalls it.
+ if(videoA.currentTime>.05)videoA.currentTime=0;
+ if(videoB.currentTime>.05)videoB.currentTime=0;
+ videoB.playbackRate=1;
+ Promise.all([videoA,videoB].map(v=>Promise.resolve(v.play()).then(()=>true,()=>false)))
+  // Browsers that block autoplay need a gesture, so fall back to tapping a video.
+  .then(ok=>{if(!ok.every(Boolean))$('status').textContent='Tap either result to start playback.'});
+}
+// Keep B locked to A: nudge its rate for small drift, snap only when badly out of step.
+function synchronize(){
+ if(syncing||videoA.paused||videoB.paused||videoA.seeking||videoB.seeking)return;
+ const drift=videoB.currentTime-videoA.currentTime;
+ if(Math.abs(drift)>.4){syncing=true;videoB.currentTime=videoA.currentTime;videoB.playbackRate=1;syncing=false;return}
+ videoB.playbackRate=Math.min(1.08,Math.max(.92,1-drift*1.5));
+}
+function prefetch(index){
+ const c=navigator.connection||{};
+ if(c.saveData||/^([23]g|slow-2g)$/.test(c.effectiveType||''))return;
+ const q=session.questions[index];
+ if(!q||q.prefetched)return;q.prefetched=true;
+ [q.a.video,q.b.video,q.input_image].forEach(url=>fetch(url,{cache:'force-cache'}).catch(()=>{}));
+}
+function loadQuestion(){
+ const q=session.questions[session.index];
+ $('inputImage').src=q.input_image; videoA.src=q.a.video; videoB.src=q.b.video;
+ videoA.load();videoB.load();
+ Promise.all([buffered(videoA),buffered(videoB)]).then(()=>{playBoth();prefetch(session.index+1)});
+ document.querySelectorAll('.answer').forEach(b=>{b.classList.remove('selected');b.disabled=false});
+ $('status').textContent='Watch both results, then choose an answer.'; setProgress(); window.scrollTo({top:0});
+}
+async function api(path, options={}){const r=await fetch(path,{...options,headers:{'Content-Type':'application/json',...(options.headers||{})}});const j=await r.json();if(!r.ok)throw Error(j.error||'Request failed');return j}
+function shuffle(list){for(let i=list.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[list[i],list[j]]=[list[j],list[i]]}return list}
+// Static hosting has no server to draw the sample, so the browser does it. The
+// manifest carries opaque ids only, so nothing here reveals which method is which.
+async function staticSession(){
+ const pool=await (await fetch(CFG.manifest,{cache:'no-store'})).json();
+ const chosen=shuffle(pool.slice()).slice(0,CFG.total);
+ return {
+  session_id:(crypto.randomUUID?crypto.randomUUID():String(Math.random()).slice(2)),
+  index:0,
+  questions:chosen.map(q=>{
+   const [a,b]=shuffle(q.videos.slice());
+   return {id:q.id,a:{video:a},b:{video:b},input_image:q.input};
+  }),
+ };
+}
+$('start').onclick=async()=>{
+ $('start').disabled=true;
+ try{
+  session=CFG.mode==='static'
+   ? await staticSession()
+   : await api('/api/session',{method:'POST',body:JSON.stringify({participant:$('participant').value.trim()})});
+  session.participant=$('participant').value.trim();
+  $('welcome').hidden=true;$('study').hidden=false;loadQuestion();
+ }catch(e){$('status').textContent=e.message;$('start').disabled=false}
+};
+const buttons=document.querySelectorAll('.answer');
+buttons.forEach(b=>b.onclick=()=>submit(b));
+document.querySelector('.videos').onclick=()=>{if(videoA.paused||videoB.paused)playBoth()};
+function record(answer){
+ const q=session.questions[session.index];
+ if(CFG.mode==='static'){
+  return api(CFG.api,{method:'POST',body:JSON.stringify({
+   session_id:session.session_id,participant:session.participant||'',
+   question_id:q.id,a_video:q.a.video,b_video:q.b.video,answer,
+   submitted_at:new Date().toISOString(),
+  })});
+ }
+ return api('/api/answer',{method:'POST',body:JSON.stringify({
+  session_id:session.session_id,question_id:q.id,answer})});
+}
+async function submit(button){
+ if(saving)return;saving=true;
+ const answer=button.dataset.answer;
+ buttons.forEach(x=>{x.classList.remove('selected');x.disabled=true});
+ button.classList.add('selected');$('status').textContent='Saving…';
+ try{await record(answer);
+  session.index++;
+  if(session.index>=session.questions.length){$('study').hidden=true;$('done').hidden=false;$('progress').textContent='Complete'}else loadQuestion()}
+ catch(e){$('status').textContent=e.message;buttons.forEach(x=>x.disabled=false)}
+ finally{saving=false}
+}
+// A restarting its loop is the one moment the two can diverge by a full clip.
+videoA.addEventListener('seeked',()=>{if(videoA.currentTime<.05)playBoth()});
+// A stall shows up as drift, which synchronize() snaps out; pausing the other video
+// here instead would deadlock, since a paused video never reports itself ready again.
+setInterval(synchronize,250);
+</script>
+</body></html>
