@@ -64,16 +64,60 @@
               <tr>
           <td style="padding:20px;width:100%;vertical-align:middle">
                 <h2>Research</h2>
-                <p>
+                <p style="margin-bottom: -30px;">
                   I am interested in 3D&4D reconstruction/generation, World Models. 
-                </p>
-                <p style="color: grey; font-size: smaller; margin-bottom: -30px;">
-                  (* means equal contribution)
                 </p>
               </td>
             </tr>
           </tbody></table>
           <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+          <tr onmouseout="rome_stop()" onmouseover="rome_start()">
+              <td style="padding:20px;width:25%;vertical-align:middle">
+                <div class="one">
+                  <div class="two" id="rome_image"><video width="100%" height="100%" muted autoplay loop playsinline>
+                  <source src="images/rome_teaser.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video></div>
+            <a href="https://build-rome.github.io/">
+              <img src="images/rome_teaser.jpg" width="160" height="160" alt="Building Rome from a Single Image teaser">
+            </a>
+          </div>
+          <script type="text/javascript">
+            function rome_start() {
+              document.getElementById('rome_image').style.opacity = "1";
+            }
+
+            function rome_stop() {
+              document.getElementById('rome_image').style.opacity = "0";
+            }
+            rome_stop()
+          </script>
+        </td>
+        <td style="padding:20px;width:75%;vertical-align:middle">
+          <a href="https://build-rome.github.io/">
+            <span class="papertitle">Building Rome from a Single Image</span>
+          </a>
+          <br>
+          <strong>Jiraphon Yenphraphai</strong>,
+          <a href="https://fangli333.github.io/">Fang Li</a>,
+          <a href="https://tianshuo-xu.github.io/">Tianshuo Xu</a>,
+          <a href="https://deppmeng.github.io/">Depu Meng</a>,
+          <a href="https://www.linkedin.com/in/quentin-herau-phd-38378b140">Quentin Herau</a>,
+          <a href="https://www.linkedin.com/in/yihan-hu96">Yihan Hu</a>,
+          <a href="https://raymond-yeh.com/">Raymond A. Yeh</a>,
+          <a href="https://zhanwei.site/">Wei Zhan</a>
+          <br>
+          <em>ArXiv, 2026</em>
+          <br>
+          <a href="https://build-rome.github.io/">project page</a>
+          /
+          <!-- TODO: replace with the arXiv abs URL once the submission (arXiv:submit/8188685) is announced. -->
+          <a href="https://arxiv.org/abs/XXXX.XXXXX">arXiv</a>
+          <p>
+          We redesign Trellis 2 for scenes by partitioning the scene into adaptive chunks and introducing new 2D&ndash;3D conditioning, generating complete indoor and outdoor scene meshes from a single image.
+          </p>
+        </td>
+      </tr>
           <tr onmouseout="teaser_hover_stop()" onmouseover="teaser_hover_start()">
               <td style="padding:20px;width:25%;vertical-align:middle">
                 <div class="one">
