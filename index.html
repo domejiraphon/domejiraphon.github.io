@@ -64,14 +64,18 @@
               <tr>
           <td style="padding:20px;width:100%;vertical-align:middle">
                 <h2>Research</h2>
-                <p style="margin-bottom: -30px;">
+                <p>
                   I am interested in 3D&4D reconstruction/generation, World Models. 
                 </p>
+                <div class="pub-tabs" style="margin-bottom: -20px;">
+                  <button type="button" class="pub-tab active" data-tab="selected" onclick="show_pub_tab('selected')">Selected Publications</button>
+                  <button type="button" class="pub-tab" data-tab="all" onclick="show_pub_tab('all')">All Publications</button>
+                </div>
               </td>
             </tr>
           </tbody></table>
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-          <tr onmouseout="rome_stop()" onmouseover="rome_start()">
+          <table id="pub_table" data-tab="selected" style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+          <tr class="pub-selected" onmouseout="rome_stop()" onmouseover="rome_start()">
               <td style="padding:20px;width:25%;vertical-align:middle">
                 <div class="one">
                   <div class="two" id="rome_image"><video width="100%" height="100%" muted autoplay loop playsinline>
@@ -107,7 +111,7 @@
           <a href="https://raymond-yeh.com/">Raymond A. Yeh</a>,
           <a href="https://zhanwei.site/">Wei Zhan</a>
           <br>
-          <em>ArXiv, 2026</em>
+          <em>ArXiv, 2026 (Under Review)</em>
           <br>
           <a href="https://build-rome.github.io/">project page</a>
           /
@@ -117,7 +121,7 @@
           </p>
         </td>
       </tr>
-          <tr onmouseout="teaser_hover_stop()" onmouseover="teaser_hover_start()">
+          <tr class="pub-selected" onmouseout="teaser_hover_stop()" onmouseover="teaser_hover_start()">
               <td style="padding:20px;width:25%;vertical-align:middle">
                 <div class="one">
                   <div class="two" id="teaser_hover_image"><video width=100% height=100% muted autoplay loop>
@@ -163,7 +167,57 @@
           </p>
         </td>
       </tr>
-      <tr onmouseout="meshloom_stop()" onmouseover="meshloom_start()">
+      <tr class="pub-additional" onmouseout="s2tok_stop()" onmouseover="s2tok_start()">
+        <td style="padding:20px;width:25%;vertical-align:middle">
+          <div class="one">
+            <div class="two" id="s2tok_image"><video width="100%" height="100%" muted autoplay loop playsinline>
+              <source src="images/s2tok_teaser.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video></div>
+            <a href="https://s2tok.github.io/">
+              <img src="images/s2tok_teaser.jpg" width="160" height="160" alt="S2Tok project teaser">
+            </a>
+          </div>
+          <script type="text/javascript">
+            function s2tok_start() {
+              document.getElementById('s2tok_image').style.opacity = "1";
+            }
+
+            function s2tok_stop() {
+              document.getElementById('s2tok_image').style.opacity = "0";
+            }
+            s2tok_stop()
+          </script>
+        </td>
+        <td style="padding:20px;width:75%;vertical-align:middle">
+          <a href="https://s2tok.github.io/">
+            <span class="papertitle">S2Tok: Streaming 3D Gaussian Reconstruction with Persistent Spatial Tokens</span>
+          </a>
+          <br>
+          <a href="https://fangli333.github.io/">Fang Li*</a>,
+          <strong>Jiraphon Yenphraphai*</strong>,
+          <a href="https://www.linkedin.com/in/quentin-herau-phd-38378b140">Quentin Herau</a>,
+          <a href="https://deppmeng.github.io/">Depu Meng</a>,
+          <a href="https://www.linkedin.com/in/yihan-hu96">Yihan Hu</a>,
+          <a href="https://tianshuo-xu.github.io/">Tianshuo Xu</a>,
+          <a href="https://ece.illinois.edu/about/directory/faculty/n-ahuja">Narendra Ahuja</a>,
+          <a href="https://zhanwei.site/">Wei Zhan</a>
+          <br>
+          <em>ArXiv, 2026 (Under Review)</em>
+          <br>
+          <a href="https://s2tok.github.io/">project page</a>
+          /
+          <a href="https://arxiv.org/abs/2610.08978">arXiv</a>
+          /
+          <a href="https://github.com/Applied-Intuition-Open-Source/S2Tok">code</a>
+          /
+          <a href="https://huggingface.co/AppliedIntuitionResearch/S2Tok">checkpoints</a>
+          <p>
+          A streaming 3D Gaussian reconstruction model that keeps the scene as a set of persistent latent spatial tokens, updating them one frame at a time without a KV cache.
+          </p>
+        </td>
+      </tr>
+      <tr class="pub-additional" onmouseout="meshloom_stop()" onmouseover="meshloom_start()">
         <td style="padding:20px;width:25%;vertical-align:middle">
           <div class="one">
             <div class="two" id="meshloom_image"><video width="100%" height="100%" muted autoplay loop playsinline>
@@ -208,7 +262,7 @@
           </p>
         </td>
       </tr>
-          <tr onmouseout="shapegen_stop()" onmouseover="shapegen_start()">
+          <tr class="pub-selected" onmouseout="shapegen_stop()" onmouseover="shapegen_start()">
               <td style="padding:20px;width:25%;vertical-align:middle">
                 <div class="one">
                   <div class="two" id='shapegen4d_image'><video  width=100% height=100% muted autoplay loop>
@@ -252,7 +306,7 @@
           </p>
         </td>
       </tr>
-            <tr onmouseout="sculpting_stop()" onmouseover="sculpting_start()">
+            <tr class="pub-selected" onmouseout="sculpting_stop()" onmouseover="sculpting_start()">
               <td style="padding:20px;width:25%;vertical-align:middle">
                 <div class="one">
                   <div class="two" id='sculpting_image'><video  width=100% height=100% muted autoplay loop>
@@ -297,7 +351,7 @@
           </p>
         </td>
       </tr>
-      <tr onmouseout="nex_stop()" onmouseover="nex_start()">
+      <tr class="pub-selected" onmouseout="nex_stop()" onmouseover="nex_start()">
             <td style="padding:20px;width:25%;vertical-align:middle">
               <div class="one">
                 <div class="two" id='nex_image'><video  width=100% height=100% muted autoplay loop>
@@ -344,7 +398,7 @@
         </p>
       </td>
     </tr>
-    <tr onmouseout="nex360_stop()" onmouseover="nex360_start()">
+    <tr class="pub-additional" onmouseout="nex360_stop()" onmouseover="nex360_start()">
           <td style="padding:20px;width:25%;vertical-align:middle">
             <div class="one">
               <div class="two" id='nex360_image'><video  width=100% height=100% muted autoplay loop>
@@ -386,6 +440,14 @@
     </td>
     </tr>
           </tbody></table>
+          <script type="text/javascript">
+            function show_pub_tab(tab) {
+              document.getElementById('pub_table').setAttribute('data-tab', tab);
+              document.querySelectorAll('.pub-tab').forEach(function (button) {
+                button.classList.toggle('active', button.getAttribute('data-tab') === tab);
+              });
+            }
+          </script>
           <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
             <tr>
               <td style="padding:0px">

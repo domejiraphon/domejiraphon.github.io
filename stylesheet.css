@@ -133,3 +133,30 @@ h2 {
 span.highlight {
   background-color: #ffffd0;
 }
+
+.pub-tab {
+  font-family: 'Lato', Verdana, Helvetica, sans-serif;
+  font-size: 14px;
+  padding: 6px 14px;
+  margin-right: 6px;
+  border: 1px solid #1772d0;
+  border-radius: 16px;
+  background: white;
+  color: #1772d0;
+  cursor: pointer;
+}
+
+.pub-tab:hover {
+  border-color: #f09228;
+  color: #f09228;
+}
+
+.pub-tab.active {
+  background: #1772d0;
+  border-color: #1772d0;
+  color: white;
+}
+
+#pub_table[data-tab="selected"] tr.pub-additional {
+  display: none;
+}
